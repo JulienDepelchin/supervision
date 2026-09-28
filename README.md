@@ -59,15 +59,16 @@ Si le jeton expire ou si le VPS tombe, plus aucun heartbeat n'arrive et le job p
 
 ## Alertes Slack via Marcel
 
-Marcel interroge la page publique ; aucun secret n'est nécessaire.
+Tâche Hermes `supervision-alertes` sur le VPS : toutes les 15 min, sans agent (aucun appel au modèle),
+elle lance `~/.hermes/scripts/supervision_alertes.py` (copie de référence : [marcel/](marcel/)) et
+envoie sa sortie en message privé Slack (`slack:D0C326EDYJE`). Aucune sortie = aucun message.
 
-Tâche à confier à Marcel (toutes les 15 à 30 min) :
-
-1. Lire `https://juliendepelchin.github.io/supervision/data/events.json`.
-   Pour chaque événement dont `seq` est supérieur au dernier `seq` mémorisé, poster sur Slack :
-   `<label> : <de> → <vers>. <detail>` (+ lien `url` s'il existe), puis mémoriser le plus grand `seq`.
-   Au tout premier passage, mémoriser le `seq` courant sans rien poster.
-2. **Surveiller le superviseur** : lire `data/status.json` ; si `generated_at` date de plus de 90 min,
-   alerter une seule fois (« Le superviseur ne tourne plus ») jusqu'à ce qu'il redevienne frais.
+Le script lit `events.json` et `status.json` via l'API publique de GitHub (aucun jeton) et signale :
+- chaque nouveau changement d'état d'un job (mémoire : `~/.hermes/state/supervision_alertes.json`) ;
+- un superviseur arrêté (`generated_at` de plus de 90 min), puis son retour ;
+- un tableau illisible 6 passages de suite (1 h 30), puis son retour.
 
 Marcel tourne hors de GitHub : il sert donc aussi de filet de sécurité si GitHub Actions ou le superviseur tombent.
+
+Commandes utiles (sur le VPS) : `hermes cron list`, `hermes cron runs`, `hermes cron pause supervision-alertes`.
+Après modification du script dans `marcel/`, le recopier : `scp marcel/supervision_alertes.py hermes:.hermes/scripts/`.
