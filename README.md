@@ -39,10 +39,59 @@ sur les dépôts concernés), et un tableau `PLANNING` qui dit quel workflow lan
 
 Les crons quotidiens tolérants au retard restent sur le cron GitHub de leur dépôt.
 
-## Ajouter un job
+## Ajouter un nouveau cron
 
-Ajouter une entrée dans `jobs.yml`. Choisir `max_silence` avec une marge d'environ trois fois
-l'intervalle normal : les crons GitHub prennent régulièrement 30 min à plusieurs heures de retard.
+### 1. Choisir où il tourne et qui le déclenche
+
+Le code tourne **sur GitHub Actions** par défaut (gratuit pour un dépôt public, journaux conservés,
+secrets rangés, vu automatiquement par le superviseur). Reste à choisir qui donne le top départ :
+
+| Besoin | Déclencheur |
+|---|---|
+| Une fois par jour (ou moins), quelques heures de retard sans gravité | cron GitHub du dépôt (`on: schedule`) |
+| Plus d'une fois par heure, ou à heure précise (alerte, poll) | Worker `lab-crons` (une ligne dans `PLANNING`) |
+| Fichiers à conserver entre deux passages, traitement très long, site qui bloque GitHub, besoin de Marcel | VPS, tâche Hermes + heartbeat |
+
+Pièges :
+- **Fuseau horaire** : cron GitHub et `lab-crons` sont en **UTC** (Paris = UTC+2 l'été, UTC+1 l'hiver) ;
+  Hermes est à l'heure de Paris. Pour une heure locale fixe toute l'année, passer par Hermes.
+- **Cron GitHub** : retards fréquents (jusqu'à plusieurs heures), passages parfois sautés, et désactivation
+  automatique après 60 jours sans activité sur le dépôt.
+
+### 2. Liste de vérifications
+
+**Cron GitHub**
+- [ ] `on: schedule` dans le workflow, **et** `workflow_dispatch` (pour le lancer à la main).
+
+**Worker `lab-crons`**
+- [ ] Le workflow a `on: workflow_dispatch` (avec ses `inputs` s'il en attend).
+- [ ] Une ligne dans `PLANNING` de [cloudflare/lab-crons.js](cloudflare/lab-crons.js), commitée ici,
+      **puis** collée dans l'éditeur Cloudflare et déployée (Deploy).
+- [ ] Si le dépôt est nouveau : l'ajouter au jeton `cloudflare-lab-crons` (GitHub > Fine-grained tokens >
+      le jeton > Repository access). Sinon, les journaux du Worker affichent « ÉCHEC … 403 ».
+
+**VPS (Hermes)**
+- [ ] Script dans `~/.hermes/scripts/`, tâche créée avec `hermes cron create`.
+- [ ] Fonction `heartbeat` ajoutée au script (section suivante), avec le bon `job`.
+
+**Dans tous les cas**
+- [ ] Une entrée dans [jobs.yml](jobs.yml) : `id`, `projet`, `label`, `source`, `repo`/`workflow`
+      (ou `source: heartbeat`), `declencheur`, `max_silence`.
+      `max_silence` ≈ trois fois l'intervalle normal (10 min → 40m ; 30 min → 90m ; quotidien → 36h).
+      Pour un job qui ne tourne pas le week-end, compter le trou du vendredi au lundi.
+- [ ] Si le dépôt est privé : l'ajouter au jeton de lecture du superviseur (`SUPERVISION_TOKEN`).
+- [ ] Pousser, puis vérifier sur le tableau, après le premier passage, que le job est « OK ».
+
+### 3. Les jetons en service
+
+| Jeton | Droits | Où il est stocké | Sert à |
+|---|---|---|---|
+| Lecture du superviseur | Actions : lecture, dépôts surveillés | secret `SUPERVISION_TOKEN` du dépôt `supervision` | lire les runs |
+| `cloudflare-lab-crons` | Actions : écriture, dépôts du `PLANNING` | secret `GITHUB_TOKEN` du Worker `lab-crons` | lancer les workflows fréquents |
+| `heartbeat-vps` | Actions : écriture, dépôt `supervision` | `~/.config/supervision.env` sur le VPS | signaler les passages des jobs du VPS |
+
+Expiration : un an au plus. Noter les dates ; à l'expiration, les jobs passent « Inconnu » (lecture)
+ou « Muet » (écriture) sur le tableau, et Marcel prévient.
 
 ## Jobs hors GitHub : heartbeat (ex. veille RAA sur le VPS)
 
