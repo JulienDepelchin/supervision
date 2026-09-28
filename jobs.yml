@@ -1,0 +1,81 @@
+# Jobs surveillés par le superviseur.
+#
+# source: github    -> lit les runs GitHub Actions du workflow (cron GitHub ou déclenché par Cloudflare)
+# source: heartbeat -> le job signale lui-même ses passages (VPS, machine locale…), voir README
+#
+# max_silence : délai sans aucun run au-delà duquel le job passe « muet ».
+#   Formats : 40m, 3h, 36h, 8d. Prévoir une marge : les crons GitHub prennent souvent du retard.
+
+owner: JulienDepelchin
+
+jobs:
+  - id: raa-veille
+    projet: RAA-veille
+    label: Veille RAA Nord / Pas-de-Calais
+    source: heartbeat
+    declencheur: VPS OVH (Marcel)
+    max_silence: 8d          # À AJUSTER selon la cadence sur le VPS (hebdo le lundi sur GitHub)
+
+  - id: veille-carburants
+    projet: veille-carburants
+    label: Alerte prix carburants
+    source: github
+    repo: veille-carburants
+    workflow: alerte-carburants.yml
+    declencheur: Cloudflare, toutes les 30 min
+    max_silence: 90m
+
+  - id: transports-autoroutes
+    projet: Transports
+    label: Poll autoroutes
+    source: github
+    repo: classement-actifs-lille
+    workflow: poll-autoroutes.yml
+    declencheur: Cloudflare, toutes les 10 min
+    max_silence: 40m
+
+  - id: transports-dir-nord
+    projet: Transports
+    label: Poll DIR Nord
+    source: github
+    repo: classement-actifs-lille
+    workflow: poll-dir-nord.yml
+    declencheur: Cloudflare, toutes les 10 min
+    max_silence: 40m
+
+  - id: transports-ilevia
+    projet: Transports
+    label: Poll Ilévia perturbations
+    source: github
+    repo: classement-actifs-lille
+    workflow: poll-ilevia-pertu.yml
+    declencheur: Cloudflare, toutes les 10 min
+    max_silence: 40m
+
+  - id: transports-ter
+    projet: Transports
+    label: Poll TER temps réel
+    source: github
+    repo: classement-actifs-lille
+    workflow: poll-ter-rt.yml
+    declencheur: Cloudflare, toutes les 10 min
+    max_silence: 40m
+
+  - id: veille-datagouv
+    projet: Veille data.gouv
+    label: Veille data.gouv
+    source: github
+    repo: veille_data_gouv
+    # workflow: à préciser (dépôt privé, non lisible sans jeton).
+    # Sans « workflow », tous les workflows du dépôt sont pris en compte.
+    declencheur: cron GitHub
+    max_silence: 36h         # À AJUSTER
+
+  - id: comparateur-carburants
+    projet: Comparateur carburants FR-BE
+    label: Update prix carburants
+    source: github
+    repo: comparateur_carburants
+    workflow: update-prix-carburants.yml
+    declencheur: cron GitHub quotidien
+    max_silence: 36h

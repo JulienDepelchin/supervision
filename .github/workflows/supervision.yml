@@ -1,0 +1,49 @@
+name: Supervision
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"        # toutes les 30 min
+  workflow_dispatch:
+  repository_dispatch:
+    types: [heartbeat]            # envoyé par les jobs hors GitHub (VPS)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: supervision              # un seul passage à la fois (écriture de docs/data)
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml
+
+      - name: Vérification
+        env:
+          GH_TOKEN: ${{ secrets.SUPERVISION_TOKEN }}
+          HEARTBEAT: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || '' }}
+        run: |
+          if [ -n "$HEARTBEAT" ]; then
+            python supervise.py --heartbeat "$HEARTBEAT"
+          else
+            python supervise.py
+          fi
+
+      - name: Commit des données
+        run: |
+          git config user.name "supervision-bot"
+          git config user.email "supervision-bot@users.noreply.github.com"
+          git add docs/data
+          git diff --cached --quiet && exit 0
+          git commit -m "données de supervision $(date -u +%FT%TZ)"
+          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done
+          exit 1

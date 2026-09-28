@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supervision du Lab</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface-0: #f3f3f1;
+  --surface-1: #fcfcfb;
+  --border: #e2e1dc;
+  --grid: #ecebe6;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #7a7973;
+  --good: #0ca30c;
+  --warning: #fab219;
+  --critical: #d03b3b;
+  --neutral: #9a9992;
+  --tick-ok: #0ca30c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --surface-0: #111110;
+    --surface-1: #1a1a19;
+    --border: #2e2d2b;
+    --grid: #262624;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #8f8e86;
+    --neutral: #6f6e68;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-0: #111110;
+  --surface-1: #1a1a19;
+  --border: #2e2d2b;
+  --grid: #262624;
+  --text-primary: #ffffff;
+  --text-secondary: #c3c2b7;
+  --text-muted: #8f8e86;
+  --neutral: #6f6e68;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--surface-0); color: var(--text-primary);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 48px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 16px; }
+h1 { font-size: 22px; margin: 0; }
+h2 { font-size: 15px; margin: 32px 0 8px; }
+.meta { color: var(--text-secondary); }
+.stale { color: var(--critical); font-weight: 600; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 20px; }
+.tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+.tile .n { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.tile .l { color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
+.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.row { display: grid; grid-template-columns: 150px minmax(180px, 1.2fr) 2fr 110px; gap: 12px; align-items: center;
+       padding: 10px 14px; border-top: 1px solid var(--border); }
+.row:first-child { border-top: 0; }
+.row.head { color: var(--text-muted); font-size: 12px; padding-block: 8px; }
+.proj { color: var(--text-muted); font-size: 12px; }
+.detail { color: var(--text-secondary); font-size: 12px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.s-ok .dot { background: var(--good); }
+.s-echec .dot { background: var(--critical); }
+.s-muet .dot { background: var(--warning); }
+.s-desactive .dot, .s-inconnu .dot { background: var(--neutral); }
+.ago { font-variant-numeric: tabular-nums; color: var(--text-secondary); text-align: right; font-size: 13px; }
+a { color: inherit; }
+svg.tl { width: 100%; height: 26px; display: block; }
+.axis { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 11px; }
+#tip { position: fixed; pointer-events: none; background: var(--surface-1); color: var(--text-primary);
+       border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font-size: 12px;
+       box-shadow: 0 4px 14px rgb(0 0 0 / .15); display: none; z-index: 10; white-space: nowrap; }
+table { width: 100%; border-collapse: collapse; }
+td, th { text-align: left; padding: 7px 14px; border-top: 1px solid var(--border); font-size: 13px; }
+th { color: var(--text-muted); font-weight: 500; font-size: 12px; border-top: 0; }
+td.t { font-variant-numeric: tabular-nums; color: var(--text-secondary); white-space: nowrap; }
+.empty { padding: 14px; color: var(--text-muted); }
+@media (max-width: 760px) {
+  .row { grid-template-columns: 1fr auto; }
+  .row .tlcell { grid-column: 1 / -1; }
+  .row.head { display: none; }
+  .row > .badge { order: 2; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Supervision du Lab</h1>
+    <span class="meta" id="gen">Chargement…</span>
+  </header>
+
+  <div class="tiles" id="tiles"></div>
+
+  <div class="card" id="jobs"></div>
+
+  <h2>Changements d'état</h2>
+  <div class="card"><table id="events"></table></div>
+</main>
+<div id="tip"></div>
+
+<script>
+const LABELS = { ok: "OK", echec: "En échec", muet: "Muet", desactive: "Désactivé", inconnu: "Inconnu" };
+const ORDER = ["echec", "muet", "inconnu", "desactive", "ok"];
+const DAYS = 7;
+const fmt = new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function ago(iso) {
+  if (!iso) return "—";
+  const m = Math.round((Date.now() - Date.parse(iso)) / 60000);
+  if (m < 60) return `il y a ${m} min`;
+  if (m < 48 * 60) return `il y a ${Math.round(m / 60)} h`;
+  return `il y a ${Math.round(m / 1440)} j`;
+}
+function badge(etat) {
+  return `<span class="badge s-${etat}"><span class="dot"></span>${LABELS[etat] || etat}</span>`;
+}
+
+async function load(name) {
+  const r = await fetch(`data/${name}?t=${Date.now()}`);
+  if (!r.ok) throw new Error(name);
+  return r.json();
+}
+
+function timeline(runs) {
+  const now = Date.now(), t0 = now - DAYS * 864e5;
+  const bars = [];
+  for (let d = 1; d < DAYS; d++) {
+    const x = (d / DAYS * 100).toFixed(3);
+    bars.push(`<line x1="${x}%" x2="${x}%" y1="0" y2="26" stroke="var(--grid)" stroke-width="1"/>`);
+  }
+  // Succès d'abord, échecs par-dessus pour qu'ils restent visibles.
+  const sorted = [...runs].sort((a, b) => (a.conclusion !== "success") - (b.conclusion !== "success"));
+  for (const r of sorted) {
+    const t = Date.parse(r.start);
+    if (t < t0) continue;
+    const x = ((t - t0) / (now - t0) * 100).toFixed(3);
+    const bad = r.status === "completed" && r.conclusion !== "success";
+    const col = bad ? "var(--critical)" : r.status !== "completed" ? "var(--neutral)" : "var(--tick-ok)";
+    bars.push(`<rect x="${x}%" y="${bad ? 2 : 8}" width="2" height="${bad ? 22 : 16}" rx="1" fill="${col}"/>`);
+  }
+  return `<svg class="tl" preserveAspectRatio="none" role="img" aria-label="${runs.length} runs sur ${DAYS} jours">${bars.join("")}</svg>`;
+}
+
+function attachTip(el, runs) {
+  const tip = document.getElementById("tip");
+  const now = Date.now(), t0 = now - DAYS * 864e5;
+  el.addEventListener("mousemove", e => {
+    const box = el.getBoundingClientRect();
+    const t = t0 + (e.clientX - box.left) / box.width * (now - t0);
+    let best = null, bd = Infinity;
+    for (const r of runs) { const d = Math.abs(Date.parse(r.start) - t); if (d < bd) { bd = d; best = r; } }
+    if (!best || bd > (now - t0) / box.width * 12) { tip.style.display = "none"; return; }
+    const dur = best.dur != null ? ` · ${best.dur < 90 ? best.dur + " s" : Math.round(best.dur / 60) + " min"}` : "";
+    tip.innerHTML = `<b>${esc(best.conclusion || best.status)}</b>${dur}<br>${fmt.format(new Date(best.start))} · ${esc(best.event)}`
+      + (best.message ? `<br>${esc(best.message)}` : "");
+    tip.style.display = "block";
+    tip.style.left = Math.min(e.clientX + 12, innerWidth - tip.offsetWidth - 8) + "px";
+    tip.style.top = e.clientY + 14 + "px";
+  });
+  el.addEventListener("mouseleave", () => tip.style.display = "none");
+}
+
+async function render() {
+  let status, runs, events;
+  try {
+    [status, runs, events] = await Promise.all([load("status.json"), load("runs.json"), load("events.json")]);
+  } catch {
+    document.getElementById("gen").textContent = "Données indisponibles (le superviseur n'a pas encore tourné ?)";
+    return;
+  }
+  const genAge = (Date.now() - Date.parse(status.generated_at)) / 60000;
+  document.getElementById("gen").innerHTML =
+    `Dernière vérification : ${fmt.format(new Date(status.generated_at))} (${ago(status.generated_at)})`
+    + (genAge > 90 ? ` — <span class="stale">⚠ le superviseur lui-même semble arrêté</span>` : "");
+
+  const counts = Object.fromEntries(ORDER.map(k => [k, 0]));
+  status.jobs.forEach(j => counts[j.etat] = (counts[j.etat] || 0) + 1);
+  document.getElementById("tiles").innerHTML = ORDER.filter(k => counts[k] || k === "ok" || k === "echec" || k === "muet")
+    .map(k => `<div class="tile"><div class="n">${counts[k]}</div><div class="l">${badge(k)}</div></div>`).join("");
+
+  const jobs = [...status.jobs].sort((a, b) => ORDER.indexOf(a.etat) - ORDER.indexOf(b.etat) || a.projet.localeCompare(b.projet));
+  const box = document.getElementById("jobs");
+  box.innerHTML = `<div class="row head"><div>État</div><div>Job</div><div class="axis"><span>−${DAYS} j</span><span>runs sur ${DAYS} jours</span><span>maintenant</span></div><div style="text-align:right">Dernier run</div></div>`
+    + jobs.map(j => `
+    <div class="row">
+      ${badge(j.etat)}
+      <div>
+        <div>${j.dernier_url ? `<a href="${esc(j.dernier_url)}" target="_blank" rel="noopener">${esc(j.label)}</a>` : esc(j.label)}</div>
+        <div class="proj">${esc(j.projet)} · ${esc(j.declencheur)} · seuil ${esc(j.max_silence)}</div>
+        ${j.detail ? `<div class="detail">${esc(j.detail)}</div>` : ""}
+      </div>
+      <div class="tlcell" data-id="${esc(j.id)}">${timeline(runs[j.id] || [])}</div>
+      <div class="ago" title="${j.dernier_run ? fmt.format(new Date(j.dernier_run)) : ""}">${ago(j.dernier_run)}</div>
+    </div>`).join("");
+  box.querySelectorAll(".tlcell").forEach(el => attachTip(el, runs[el.dataset.id] || []));
+
+  const ev = events.events.slice(0, 50);
+  document.getElementById("events").innerHTML = ev.length
+    ? `<tr><th>Date</th><th>Job</th><th>Changement</th><th>Détail</th></tr>` + ev.map(e => `
+      <tr><td class="t">${fmt.format(new Date(e.at))}</td><td>${esc(e.label)}</td>
+      <td>${badge(e.de)} → ${badge(e.vers)}</td><td class="detail">${esc(e.detail)}</td></tr>`).join("")
+    : `<tr><td class="empty">Aucun changement d'état enregistré.</td></tr>`;
+}
+
+render();
+setInterval(render, 5 * 60 * 1000);
+</script>
+</body>
+</html>
