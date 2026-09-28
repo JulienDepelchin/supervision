@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-28T10:32:29Z",
+ "generated_at": "2026-09-28T10:49:13Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -42,9 +42,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-09-28T10:30:44Z",
+   "dernier_run": "2026-09-28T10:40:42Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36410143289"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36411120556"
   },
   {
    "id": "transports-dir-nord",
@@ -57,9 +57,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-09-28T10:30:45Z",
+   "dernier_run": "2026-09-28T10:40:43Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36410145905"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36411123178"
   },
   {
    "id": "transports-ilevia",
@@ -72,9 +72,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-09-28T10:30:46Z",
+   "dernier_run": "2026-09-28T10:40:45Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36410148315"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36411125749"
   },
   {
    "id": "transports-ter",
@@ -87,16 +87,16 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-09-28T10:30:42Z",
+   "dernier_run": "2026-09-28T10:40:40Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36409140238"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36411118086"
   },
   {
    "id": "veille-datagouv",
    "projet": "Veille data.gouv",
    "label": "Veille data.gouv",
    "source": "github",
-   "declencheur": "cron GitHub",
+   "declencheur": "cron GitHub quotidien",
    "repo": "JulienDepelchin/veille_data_gouv",
    "max_silence": "36h",
    "etat": "ok",
