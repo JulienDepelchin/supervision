@@ -66,10 +66,9 @@ jobs:
     label: Veille data.gouv
     source: github
     repo: veille_data_gouv
-    # workflow: à préciser (dépôt privé, non lisible sans jeton).
     # Sans « workflow », tous les workflows du dépôt sont pris en compte.
-    declencheur: cron GitHub
-    max_silence: 36h         # À AJUSTER
+    declencheur: cron GitHub quotidien
+    max_silence: 36h
 
   - id: comparateur-carburants
     projet: Comparateur carburants FR-BE
