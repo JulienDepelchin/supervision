@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-28T12:32:19Z",
+ "generated_at": "2026-09-28T12:46:22Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -21,7 +21,7 @@
    "projet": "veille-carburants",
    "label": "Alerte prix carburants",
    "source": "github",
-   "declencheur": "Cloudflare, toutes les 30 min",
+   "declencheur": "Cloudflare lab-crons, toutes les 30 min",
    "repo": "JulienDepelchin/veille-carburants",
    "max_silence": "90m",
    "etat": "ok",
@@ -36,60 +36,60 @@
    "projet": "Transports",
    "label": "Poll autoroutes",
    "source": "github",
-   "declencheur": "Cloudflare, toutes les 10 min",
+   "declencheur": "Cloudflare lab-crons, toutes les 10 min",
    "repo": "JulienDepelchin/classement-actifs-lille",
    "max_silence": "40m",
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-09-28T12:30:46Z",
+   "dernier_run": "2026-09-28T12:40:56Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36422301010"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36423393563"
   },
   {
    "id": "transports-dir-nord",
    "projet": "Transports",
    "label": "Poll DIR Nord",
    "source": "github",
-   "declencheur": "Cloudflare, toutes les 10 min",
+   "declencheur": "Cloudflare lab-crons, toutes les 10 min",
    "repo": "JulienDepelchin/classement-actifs-lille",
    "max_silence": "40m",
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-09-28T12:30:48Z",
+   "dernier_run": "2026-09-28T12:40:58Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36422304738"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36423396720"
   },
   {
    "id": "transports-ilevia",
    "projet": "Transports",
    "label": "Poll Ilévia perturbations",
    "source": "github",
-   "declencheur": "Cloudflare, toutes les 10 min",
+   "declencheur": "Cloudflare lab-crons, toutes les 10 min",
    "repo": "JulienDepelchin/classement-actifs-lille",
    "max_silence": "40m",
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-09-28T12:30:50Z",
+   "dernier_run": "2026-09-28T12:40:59Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36422308049"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36423399843"
   },
   {
    "id": "transports-ter",
    "projet": "Transports",
    "label": "Poll TER temps réel",
    "source": "github",
-   "declencheur": "Cloudflare, toutes les 10 min",
+   "declencheur": "Cloudflare lab-crons, toutes les 10 min",
    "repo": "JulienDepelchin/classement-actifs-lille",
    "max_silence": "40m",
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-09-28T12:30:44Z",
+   "dernier_run": "2026-09-28T12:40:54Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36421241416"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36423391018"
   },
   {
    "id": "veille-datagouv",
