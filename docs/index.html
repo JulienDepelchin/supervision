@@ -9,8 +9,10 @@
   color-scheme: light;
   --surface-0: #f3f3f1;
   --surface-1: #fcfcfb;
+  --surface-2: #f0efeb;
   --border: #e2e1dc;
-  --grid: #ecebe6;
+  --track: #e9e8e3;
+  --grid: #d9d8d2;
   --text-primary: #0b0b0b;
   --text-secondary: #52514e;
   --text-muted: #7a7973;
@@ -18,113 +20,300 @@
   --warning: #fab219;
   --critical: #d03b3b;
   --neutral: #9a9992;
-  --tick-ok: #0ca30c;
+  --band: rgb(250 178 25 / .28);
+  --banner-ok-bg: #e9f5e6;
+  --banner-warn-bg: #fdf3dc;
+  --banner-crit-bg: #fbe7e5;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --surface-0: #111110;
     --surface-1: #1a1a19;
+    --surface-2: #222220;
     --border: #2e2d2b;
-    --grid: #262624;
+    --track: #2a2a27;
+    --grid: #3a3936;
     --text-primary: #ffffff;
     --text-secondary: #c3c2b7;
     --text-muted: #8f8e86;
     --neutral: #6f6e68;
+    --band: rgb(250 178 25 / .30);
+    --banner-ok-bg: #16261a;
+    --banner-warn-bg: #2d2412;
+    --banner-crit-bg: #321816;
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
   --surface-0: #111110;
   --surface-1: #1a1a19;
+  --surface-2: #222220;
   --border: #2e2d2b;
-  --grid: #262624;
+  --track: #2a2a27;
+  --grid: #3a3936;
   --text-primary: #ffffff;
   --text-secondary: #c3c2b7;
   --text-muted: #8f8e86;
   --neutral: #6f6e68;
+  --band: rgb(250 178 25 / .30);
+  --banner-ok-bg: #16261a;
+  --banner-warn-bg: #2d2412;
+  --banner-crit-bg: #321816;
 }
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0; background: var(--surface-0); color: var(--text-primary);
   font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
-main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 48px; }
-header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 16px; }
-h1 { font-size: 22px; margin: 0; }
-h2 { font-size: 15px; margin: 32px 0 8px; }
-.meta { color: var(--text-secondary); }
-.stale { color: var(--critical); font-weight: 600; }
-.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 20px; }
-.tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
-.tile .n { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; }
-.tile .l { color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
-.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-.row { display: grid; grid-template-columns: 150px minmax(180px, 1.2fr) 2fr 110px; gap: 12px; align-items: center;
-       padding: 10px 14px; border-top: 1px solid var(--border); }
-.row:first-child { border-top: 0; }
-.row.head { color: var(--text-muted); font-size: 12px; padding-block: 8px; }
-.proj { color: var(--text-muted); font-size: 12px; }
-.detail { color: var(--text-secondary); font-size: 12px; }
-.badge { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
-.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+main { max-width: 1180px; margin: 0 auto; padding: 28px 16px 48px; }
+a { color: inherit; text-decoration-color: var(--grid); text-underline-offset: 3px; }
+a:hover { text-decoration-color: currentColor; }
+
+/* En-tête et bandeau d'état */
+.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; margin-bottom: 14px; }
+h1 { font-size: 22px; margin: 0; letter-spacing: -.01em; }
+.meta { color: var(--text-secondary); font-size: 13px; }
+.banner { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 10px;
+          border: 1px solid var(--border); margin-bottom: 22px; background: var(--banner-ok-bg); }
+.banner.warn { background: var(--banner-warn-bg); }
+.banner.crit { background: var(--banner-crit-bg); }
+.banner .icon { width: 28px; height: 28px; border-radius: 50%; flex: none; display: grid; place-items: center;
+                color: #fff; font-weight: 700; font-size: 15px; background: var(--good); }
+.banner.warn .icon { background: var(--warning); color: #3a2a00; }
+.banner.crit .icon { background: var(--critical); }
+.banner .title { font-size: 16px; font-weight: 650; }
+.banner .sub { color: var(--text-secondary); font-size: 13px; }
+
+/* Légende */
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--text-secondary); font-size: 12px; margin: 0 0 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 10px; height: 12px; border-radius: 2px; display: inline-block; }
+.sw.ok { background: var(--good); }
+.sw.ko { background: var(--critical); }
+.sw.none { background: var(--track); }
+.sw.band { background: var(--band); box-shadow: inset 0 -2px 0 var(--warning); width: 16px; }
+
+/* Groupes de jobs */
+.group { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+.ghead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 10px 16px; background: var(--surface-2);
+         border-bottom: 1px solid var(--border); }
+.ghead h2 { font-size: 14px; margin: 0; }
+.ghead .gmeta { color: var(--text-muted); font-size: 12px; }
+.row, .axisrow { display: grid; grid-template-columns: 112px minmax(170px, 1fr) minmax(0, 2.1fr) 96px; gap: 14px;
+                 align-items: center; padding: 10px 16px; }
+.row { border-top: 1px solid var(--border); }
+.axisrow { padding-block: 6px 0; }
+.axisrow + .row { border-top: 0; }
+.label { font-weight: 550; }
+.jmeta { color: var(--text-muted); font-size: 12px; }
+.detail { color: var(--text-secondary); font-size: 12px; margin-top: 2px; }
+.row.bad .detail { color: var(--text-primary); }
+.badge { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; font-size: 13px; white-space: nowrap; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; background: var(--neutral); }
 .s-ok .dot { background: var(--good); }
 .s-echec .dot { background: var(--critical); }
 .s-muet .dot { background: var(--warning); }
-.s-desactive .dot, .s-inconnu .dot { background: var(--neutral); }
-.ago { font-variant-numeric: tabular-nums; color: var(--text-secondary); text-align: right; font-size: 13px; }
-a { color: inherit; }
-svg.tl { width: 100%; height: 26px; display: block; }
-.axis { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 11px; }
+.ago { font-variant-numeric: tabular-nums; color: var(--text-secondary); text-align: right; font-size: 13px; white-space: nowrap; }
+.tl { position: relative; height: 24px; cursor: default; }
+.tl svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+.tl.clickable { cursor: pointer; }
+.axis { position: relative; height: 16px; color: var(--text-muted); font-size: 11px; }
+.axis span { position: absolute; top: 0; white-space: nowrap; transform: translateX(3px); }
+
+/* Changements d'état */
+h3 { font-size: 15px; margin: 30px 0 10px; }
+.events { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.ev { display: grid; grid-template-columns: 150px minmax(0, 1.3fr) auto minmax(0, 1.5fr); gap: 4px 16px; align-items: center;
+      padding: 9px 16px; border-top: 1px solid var(--border); font-size: 13px; }
+.ev:first-child { border-top: 0; }
+.ev .t { font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.ev .chg { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.ev .d { color: var(--text-secondary); font-size: 12px; }
+.empty { padding: 14px 16px; color: var(--text-muted); }
+footer { margin-top: 28px; color: var(--text-muted); font-size: 12px; }
+
 #tip { position: fixed; pointer-events: none; background: var(--surface-1); color: var(--text-primary);
-       border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; font-size: 12px;
-       box-shadow: 0 4px 14px rgb(0 0 0 / .15); display: none; z-index: 10; white-space: nowrap; }
-table { width: 100%; border-collapse: collapse; }
-td, th { text-align: left; padding: 7px 14px; border-top: 1px solid var(--border); font-size: 13px; }
-th { color: var(--text-muted); font-weight: 500; font-size: 12px; border-top: 0; }
-td.t { font-variant-numeric: tabular-nums; color: var(--text-secondary); white-space: nowrap; }
-.empty { padding: 14px; color: var(--text-muted); }
+       border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 12px; line-height: 1.5;
+       box-shadow: 0 6px 20px rgb(0 0 0 / .16); display: none; z-index: 10; max-width: 300px; }
+#tip b { font-weight: 650; }
+
 @media (max-width: 760px) {
-  .row { grid-template-columns: 1fr auto; }
+  main { padding-top: 20px; }
+  .row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; }
+  .row .jobcell { grid-column: 1; grid-row: 1; }
+  .row .badge { grid-column: 2; grid-row: 1; align-self: start; }
   .row .tlcell { grid-column: 1 / -1; }
-  .row.head { display: none; }
-  .row > .badge { order: 2; }
+  .row .ago { grid-column: 1 / -1; text-align: left; font-size: 12px; }
+  .axisrow { grid-template-columns: minmax(0, 1fr); }
+  .axisrow > :not(.axis) { display: none; }
+  .ev { grid-template-columns: minmax(0, 1fr) auto; }
+  .ev .t { grid-column: 1 / -1; font-size: 12px; }
+  .ev .d { grid-column: 1 / -1; }
 }
 </style>
 </head>
 <body>
 <main>
-  <header>
+  <div class="top">
     <h1>Supervision du Lab</h1>
     <span class="meta" id="gen">Chargement…</span>
-  </header>
+  </div>
 
-  <div class="tiles" id="tiles"></div>
+  <div class="banner" id="banner" hidden></div>
 
-  <div class="card" id="jobs"></div>
+  <div class="legend" aria-label="Légende de la frise">
+    <span><i class="sw ok"></i>Runs réussis (par heure)</span>
+    <span><i class="sw ko"></i>Au moins un échec</span>
+    <span><i class="sw band"></i>Silence au-delà du seuil</span>
+    <span><i class="sw none"></i>Aucun run</span>
+  </div>
 
-  <h2>Changements d'état</h2>
-  <div class="card"><table id="events"></table></div>
+  <div id="groups"></div>
+
+  <h3>Changements d'état</h3>
+  <div class="events" id="events"></div>
+
+  <footer>
+    Données : API GitHub Actions et heartbeats des jobs hors GitHub, relevés toutes les 15 min.
+    <a href="https://github.com/JulienDepelchin/supervision">Code et configuration</a>
+  </footer>
 </main>
-<div id="tip"></div>
+<div id="tip" role="tooltip"></div>
 
 <script>
 const LABELS = { ok: "OK", echec: "En échec", muet: "Muet", desactive: "Désactivé", inconnu: "Inconnu" };
 const ORDER = ["echec", "muet", "inconnu", "desactive", "ok"];
-const DAYS = 7;
-const fmt = new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+const DAYS = 7, HOUR = 36e5, SPAN = DAYS * 24 * HOUR;
+const fmtFull = new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+const fmtDay = new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric" });
+const fmtHour = new Intl.DateTimeFormat("fr-FR", { weekday: "short", day: "numeric", month: "short", hour: "2-digit" });
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const worst = states => states.reduce((a, b) => ORDER.indexOf(b) < ORDER.indexOf(a) ? b : a, "ok");
 
+function parseSeuil(s) {
+  const m = /^(\d+)\s*([mhd])$/.exec(String(s).trim());
+  return m ? +m[1] * { m: 6e4, h: HOUR, d: 24 * HOUR }[m[2]] : Infinity;
+}
+function humanSeuil(s) {
+  const m = /^(\d+)\s*([mhd])$/.exec(String(s).trim());
+  return m ? `${m[1]} ${{ m: "min", h: "h", d: "j" }[m[2]]}` : s;
+}
+function dureeTxt(ms) {
+  const m = ms / 6e4;
+  if (m < 60) return `${Math.round(m)} min`;
+  if (m < 48 * 60) return `${(m / 60).toFixed(1).replace(".", ",").replace(",0", "")} h`;
+  return `${(m / 1440).toFixed(1).replace(".", ",").replace(",0", "")} j`;
+}
 function ago(iso) {
-  if (!iso) return "—";
-  const m = Math.round((Date.now() - Date.parse(iso)) / 60000);
-  if (m < 60) return `il y a ${m} min`;
-  if (m < 48 * 60) return `il y a ${Math.round(m / 60)} h`;
-  return `il y a ${Math.round(m / 1440)} j`;
+  if (!iso) return "jamais";
+  return `il y a ${dureeTxt(Date.now() - Date.parse(iso))}`;
 }
 function badge(etat) {
-  return `<span class="badge s-${etat}"><span class="dot"></span>${LABELS[etat] || etat}</span>`;
+  return `<span class="badge s-${etat}"><span class="dot"></span>${LABELS[etat] || esc(etat)}</span>`;
 }
+
+/* ---------- Frise : une case par heure sur 7 jours + silences au-delà du seuil ---------- */
+
+function buildModel(runs, seuilMs, now) {
+  const t0 = now - SPAN;
+  const hours = Array.from({ length: DAYS * 24 }, () => ({ n: 0, ko: 0, runs: [] }));
+  const sorted = [...runs].sort((a, b) => Date.parse(a.start) - Date.parse(b.start));
+  for (const r of sorted) {
+    const t = Date.parse(r.start);
+    if (t < t0) continue;
+    const h = hours[Math.min(hours.length - 1, Math.floor((t - t0) / HOUR))];
+    h.n++; h.runs.push(r);
+    if (r.status === "completed" && !["success", "skipped", "cancelled", "neutral"].includes(r.conclusion)) h.ko++;
+  }
+  // Silences : portion d'un trou entre deux runs (ou entre le dernier run et maintenant) qui dépasse le seuil.
+  const bands = [];
+  const times = sorted.map(r => Date.parse(r.start)).concat([now]);
+  for (let i = 0; i < times.length - 1; i++) {
+    const gap = times[i + 1] - times[i];
+    if (gap > seuilMs) {
+      const a = Math.max(t0, times[i] + seuilMs), b = times[i + 1];
+      if (b > a) bands.push({ a, b, gap });
+    }
+  }
+  const first = sorted.length ? Math.max(t0, Date.parse(sorted[0].start)) : now;
+  return { t0, now, hours, bands, first };
+}
+
+function drawTimeline(el, model) {
+  const w = el.clientWidth, H = 24;
+  if (!w) return;
+  const { t0, now, hours, bands, first } = model;
+  const x = t => (t - t0) / (now - t0) * w;
+  const cw = w / hours.length;
+  const gap = cw >= 4 ? 1 : 0;
+  const parts = [];
+  // Piste : seulement depuis le début des données disponibles.
+  parts.push(`<rect x="${x(first).toFixed(1)}" y="${H / 2 - 5}" width="${Math.max(0, w - x(first)).toFixed(1)}" height="10" rx="2" fill="var(--track)"/>`);
+  for (const b of bands) {
+    const xa = x(b.a), xb = x(b.b);
+    parts.push(`<rect x="${xa.toFixed(1)}" y="0" width="${Math.max(2, xb - xa).toFixed(1)}" height="${H}" fill="var(--band)"/>`);
+    parts.push(`<rect x="${xa.toFixed(1)}" y="${H - 2}" width="${Math.max(2, xb - xa).toFixed(1)}" height="2" fill="var(--warning)"/>`);
+  }
+  // Repères de minuit (heure locale).
+  const d = new Date(t0); d.setHours(24, 0, 0, 0);
+  for (let t = d.getTime(); t < now; t += 24 * HOUR) {
+    parts.push(`<rect x="${x(t).toFixed(1)}" y="0" width="1" height="${H}" fill="var(--grid)"/>`);
+  }
+  hours.forEach((h, i) => {
+    if (!h.n) return;
+    const col = h.ko ? "var(--critical)" : "var(--good)";
+    const hh = h.ko ? H - 4 : 14;
+    parts.push(`<rect x="${(i * cw).toFixed(1)}" y="${(H - hh) / 2}" width="${Math.max(1.5, cw - gap).toFixed(1)}" height="${hh}" rx="1" fill="${col}"/>`);
+  });
+  el.querySelector("svg").innerHTML = parts.join("");
+}
+
+function drawAxis(el, now) {
+  const w = el.clientWidth;
+  if (!w) return;
+  const t0 = now - SPAN;
+  const d = new Date(t0); d.setHours(24, 0, 0, 0);
+  const labels = [];
+  const minGap = 46;
+  let last = -Infinity;
+  for (let t = d.getTime(); t < now; t += 24 * HOUR) {
+    const px = (t - t0) / SPAN * w;
+    if (px - last < minGap || px > w - 30) continue;
+    labels.push(`<span style="left:${px.toFixed(1)}px">${fmtDay.format(new Date(t))}</span>`);
+    last = px;
+  }
+  el.innerHTML = labels.join("");
+}
+
+function tipHtml(job, model, t) {
+  const { t0, hours, bands, first } = model;
+  const i = Math.floor((t - t0) / HOUR);
+  const h = hours[i];
+  if (!h) return null;
+  const start = t0 + i * HOUR;
+  const lines = [`<b>${fmtHour.format(new Date(start))}</b>`];
+  if (t < first) {
+    lines.push("Pas encore de données de suivi");
+  } else if (h.n) {
+    const ok = h.n - h.ko;
+    lines.push(h.n === 1 ? (h.ko ? "1 run, en échec" : "1 run réussi") : `${h.n} runs : ${ok} réussi${ok > 1 ? "s" : ""}${h.ko ? `, ${h.ko} en échec` : ""}`);
+    const r = h.runs[h.runs.length - 1];
+    if (r.dur != null) lines.push(`Durée du dernier : ${r.dur < 90 ? r.dur + " s" : Math.round(r.dur / 60) + " min"}`);
+    if (r.message) lines.push(esc(r.message));
+  } else {
+    lines.push("Aucun run");
+  }
+  const b = bands.find(b => t >= b.a && t <= b.b);
+  if (b) lines.push(`<span style="color:var(--text-secondary)">Silence de ${dureeTxt(b.gap)} (seuil ${humanSeuil(job.max_silence)})</span>`);
+  return { html: lines.join("<br>"), url: h.runs.length ? h.runs[h.runs.length - 1].url : null };
+}
+
+/* ---------- Rendu ---------- */
+
+let STATE = null;
+const tip = document.getElementById("tip");
 
 async function load(name) {
   const r = await fetch(`data/${name}?t=${Date.now()}`);
@@ -132,89 +321,139 @@ async function load(name) {
   return r.json();
 }
 
-function timeline(runs) {
-  const now = Date.now(), t0 = now - DAYS * 864e5;
-  const bars = [];
-  for (let d = 1; d < DAYS; d++) {
-    const x = (d / DAYS * 100).toFixed(3);
-    bars.push(`<line x1="${x}%" x2="${x}%" y1="0" y2="26" stroke="var(--grid)" stroke-width="1"/>`);
-  }
-  // Succès d'abord, échecs par-dessus pour qu'ils restent visibles.
-  const sorted = [...runs].sort((a, b) => (a.conclusion !== "success") - (b.conclusion !== "success"));
-  for (const r of sorted) {
-    const t = Date.parse(r.start);
-    if (t < t0) continue;
-    const x = ((t - t0) / (now - t0) * 100).toFixed(3);
-    const bad = r.status === "completed" && r.conclusion !== "success";
-    const col = bad ? "var(--critical)" : r.status !== "completed" ? "var(--neutral)" : "var(--tick-ok)";
-    bars.push(`<rect x="${x}%" y="${bad ? 2 : 8}" width="2" height="${bad ? 22 : 16}" rx="1" fill="${col}"/>`);
-  }
-  return `<svg class="tl" preserveAspectRatio="none" role="img" aria-label="${runs.length} runs sur ${DAYS} jours">${bars.join("")}</svg>`;
-}
-
-function attachTip(el, runs) {
-  const tip = document.getElementById("tip");
-  const now = Date.now(), t0 = now - DAYS * 864e5;
-  el.addEventListener("mousemove", e => {
-    const box = el.getBoundingClientRect();
-    const t = t0 + (e.clientX - box.left) / box.width * (now - t0);
-    let best = null, bd = Infinity;
-    for (const r of runs) { const d = Math.abs(Date.parse(r.start) - t); if (d < bd) { bd = d; best = r; } }
-    if (!best || bd > (now - t0) / box.width * 12) { tip.style.display = "none"; return; }
-    const dur = best.dur != null ? ` · ${best.dur < 90 ? best.dur + " s" : Math.round(best.dur / 60) + " min"}` : "";
-    tip.innerHTML = `<b>${esc(best.conclusion || best.status)}</b>${dur}<br>${fmt.format(new Date(best.start))} · ${esc(best.event)}`
-      + (best.message ? `<br>${esc(best.message)}` : "");
-    tip.style.display = "block";
-    tip.style.left = Math.min(e.clientX + 12, innerWidth - tip.offsetWidth - 8) + "px";
-    tip.style.top = e.clientY + 14 + "px";
-  });
-  el.addEventListener("mouseleave", () => tip.style.display = "none");
-}
-
-async function render() {
-  let status, runs, events;
-  try {
-    [status, runs, events] = await Promise.all([load("status.json"), load("runs.json"), load("events.json")]);
-  } catch {
-    document.getElementById("gen").textContent = "Données indisponibles (le superviseur n'a pas encore tourné ?)";
-    return;
-  }
-  const genAge = (Date.now() - Date.parse(status.generated_at)) / 60000;
-  document.getElementById("gen").innerHTML =
-    `Dernière vérification : ${fmt.format(new Date(status.generated_at))} (${ago(status.generated_at)})`
-    + (genAge > 90 ? ` — <span class="stale">⚠ le superviseur lui-même semble arrêté</span>` : "");
-
-  const counts = Object.fromEntries(ORDER.map(k => [k, 0]));
+function renderBanner(status, stale) {
+  const el = document.getElementById("banner");
+  const counts = {};
   status.jobs.forEach(j => counts[j.etat] = (counts[j.etat] || 0) + 1);
-  document.getElementById("tiles").innerHTML = ORDER.filter(k => counts[k] || k === "ok" || k === "echec" || k === "muet")
-    .map(k => `<div class="tile"><div class="n">${counts[k]}</div><div class="l">${badge(k)}</div></div>`).join("");
+  const n = status.jobs.length;
+  const bad = status.jobs.filter(j => j.etat !== "ok");
+  let cls = "", icon = "✓", title, sub;
+  if (stale) {
+    cls = "crit"; icon = "!";
+    title = "Le superviseur ne tourne plus";
+    sub = `Dernière vérification ${ago(status.generated_at)} : les états ci-dessous peuvent être périmés.`;
+  } else if (!bad.length) {
+    title = "Tout fonctionne";
+    sub = `${n} jobs sur ${n} en ordre de marche.`;
+  } else {
+    cls = counts.echec || counts.inconnu ? "crit" : "warn"; icon = "!";
+    const p = ["echec", "muet", "inconnu", "desactive"].filter(k => counts[k])
+      .map(k => `${counts[k]} ${LABELS[k].toLowerCase()}`);
+    title = `${bad.length} job${bad.length > 1 ? "s" : ""} à surveiller`;
+    sub = `${p.join(" · ")} — ${bad.map(j => esc(j.label)).join(", ")}`;
+  }
+  el.className = `banner ${cls}`;
+  el.innerHTML = `<div class="icon" aria-hidden="true">${icon}</div><div><div class="title">${title}</div><div class="sub">${sub}</div></div>`;
+  el.hidden = false;
+}
 
-  const jobs = [...status.jobs].sort((a, b) => ORDER.indexOf(a.etat) - ORDER.indexOf(b.etat) || a.projet.localeCompare(b.projet));
-  const box = document.getElementById("jobs");
-  box.innerHTML = `<div class="row head"><div>État</div><div>Job</div><div class="axis"><span>−${DAYS} j</span><span>runs sur ${DAYS} jours</span><span>maintenant</span></div><div style="text-align:right">Dernier run</div></div>`
-    + jobs.map(j => `
-    <div class="row">
-      ${badge(j.etat)}
-      <div>
-        <div>${j.dernier_url ? `<a href="${esc(j.dernier_url)}" target="_blank" rel="noopener">${esc(j.label)}</a>` : esc(j.label)}</div>
-        <div class="proj">${esc(j.projet)} · ${esc(j.declencheur)} · seuil ${esc(j.max_silence)}</div>
-        ${j.detail ? `<div class="detail">${esc(j.detail)}</div>` : ""}
-      </div>
-      <div class="tlcell" data-id="${esc(j.id)}">${timeline(runs[j.id] || [])}</div>
-      <div class="ago" title="${j.dernier_run ? fmt.format(new Date(j.dernier_run)) : ""}">${ago(j.dernier_run)}</div>
-    </div>`).join("");
-  box.querySelectorAll(".tlcell").forEach(el => attachTip(el, runs[el.dataset.id] || []));
+function groupMeta(jobs) {
+  const same = k => jobs.every(j => j[k] === jobs[0][k]);
+  const bits = [];
+  if (jobs[0].repo) bits.push(`<a href="https://github.com/${esc(jobs[0].repo)}/actions">${esc(jobs[0].repo.split("/")[1])}</a>`);
+  if (same("declencheur") && jobs[0].declencheur) bits.push(esc(jobs[0].declencheur));
+  if (same("max_silence")) bits.push(`seuil de silence ${humanSeuil(jobs[0].max_silence)}`);
+  return { html: bits.join(" · "), trig: same("declencheur"), seuil: same("max_silence") };
+}
+
+function render() {
+  const { status, runs, events } = STATE;
+  const now = Date.now();
+  const stale = (now - Date.parse(status.generated_at)) / 6e4 > 90;
+  document.getElementById("gen").textContent = `Vérifié ${ago(status.generated_at)} (${fmtFull.format(new Date(status.generated_at))})`;
+  renderBanner(status, stale);
+
+  const groups = new Map();
+  for (const j of status.jobs) {
+    if (!groups.has(j.projet)) groups.set(j.projet, []);
+    groups.get(j.projet).push(j);
+  }
+  const sortedGroups = [...groups.entries()].sort(([na, a], [nb, b]) =>
+    ORDER.indexOf(worst(a.map(j => j.etat))) - ORDER.indexOf(worst(b.map(j => j.etat))) || na.localeCompare(nb, "fr"));
+
+  const models = {};
+  const box = document.getElementById("groups");
+  box.innerHTML = sortedGroups.map(([name, jobs]) => {
+    jobs.sort((a, b) => ORDER.indexOf(a.etat) - ORDER.indexOf(b.etat) || a.label.localeCompare(b.label, "fr"));
+    const gm = groupMeta(jobs);
+    const rows = jobs.map(j => {
+      models[j.id] = buildModel(runs[j.id] || [], parseSeuil(j.max_silence), now);
+      const nRuns = models[j.id].hours.reduce((s, h) => s + h.n, 0);
+      const nKo = models[j.id].hours.reduce((s, h) => s + h.ko, 0);
+      const meta = [!gm.trig && j.declencheur ? esc(j.declencheur) : "", !gm.seuil ? `seuil ${humanSeuil(j.max_silence)}` : ""].filter(Boolean).join(" · ");
+      const label = j.dernier_url ? `<a href="${esc(j.dernier_url)}" target="_blank" rel="noopener">${esc(j.label)}</a>` : esc(j.label);
+      return `
+      <div class="row ${j.etat !== "ok" ? "bad" : ""}">
+        ${badge(j.etat)}
+        <div class="jobcell">
+          <div class="label">${label}</div>
+          ${meta ? `<div class="jmeta">${meta}</div>` : ""}
+          ${j.detail ? `<div class="detail">${esc(j.detail)}</div>` : ""}
+        </div>
+        <div class="tlcell"><div class="tl" data-id="${esc(j.id)}" role="img"
+          aria-label="${nRuns} runs sur ${DAYS} jours, dont ${nKo} en échec, ${models[j.id].bands.length} silence(s) au-delà du seuil"><svg></svg></div></div>
+        <div class="ago" title="${j.dernier_run ? fmtFull.format(new Date(j.dernier_run)) : ""}">${ago(j.dernier_run)}</div>
+      </div>`;
+    }).join("");
+    return `
+    <section class="group">
+      <div class="ghead"><h2>${esc(name)}</h2><span class="gmeta">${gm.html}</span></div>
+      <div class="axisrow"><div></div><div></div><div class="axis"></div><div></div></div>
+      ${rows}
+    </section>`;
+  }).join("");
+
+  const status_by_id = Object.fromEntries(status.jobs.map(j => [j.id, j]));
+  const redraw = () => {
+    box.querySelectorAll(".tl").forEach(el => drawTimeline(el, models[el.dataset.id]));
+    box.querySelectorAll(".axis").forEach(el => drawAxis(el, now));
+  };
+  redraw();
+  window.onresize = () => { clearTimeout(window._rz); window._rz = setTimeout(redraw, 120); };
+
+  box.querySelectorAll(".tl").forEach(el => {
+    const job = status_by_id[el.dataset.id], model = models[el.dataset.id];
+    const at = e => model.t0 + (e.clientX - el.getBoundingClientRect().left) / el.clientWidth * (model.now - model.t0);
+    el.addEventListener("mousemove", e => {
+      const info = tipHtml(job, model, at(e));
+      if (!info) { tip.style.display = "none"; return; }
+      tip.innerHTML = info.html;
+      el.classList.toggle("clickable", !!info.url);
+      tip.style.display = "block";
+      tip.style.left = Math.max(8, Math.min(e.clientX + 12, innerWidth - tip.offsetWidth - 8)) + "px";
+      tip.style.top = (e.clientY + 16 + tip.offsetHeight > innerHeight ? e.clientY - tip.offsetHeight - 10 : e.clientY + 16) + "px";
+    });
+    el.addEventListener("mouseleave", () => tip.style.display = "none");
+    el.addEventListener("click", e => {
+      const info = tipHtml(job, model, at(e));
+      if (info && info.url) window.open(info.url, "_blank", "noopener");
+    });
+  });
 
   const ev = events.events.slice(0, 50);
   document.getElementById("events").innerHTML = ev.length
-    ? `<tr><th>Date</th><th>Job</th><th>Changement</th><th>Détail</th></tr>` + ev.map(e => `
-      <tr><td class="t">${fmt.format(new Date(e.at))}</td><td>${esc(e.label)}</td>
-      <td>${badge(e.de)} → ${badge(e.vers)}</td><td class="detail">${esc(e.detail)}</td></tr>`).join("")
-    : `<tr><td class="empty">Aucun changement d'état enregistré.</td></tr>`;
+    ? ev.map(e => `
+      <div class="ev">
+        <span class="t">${fmtFull.format(new Date(e.at))}</span>
+        <span>${esc(e.label)}</span>
+        <span class="chg">${badge(e.de)} <span aria-label="devient">→</span> ${badge(e.vers)}</span>
+        <span class="d">${esc(e.detail)}</span>
+      </div>`).join("")
+    : `<div class="empty">Aucun changement d'état enregistré.</div>`;
 }
 
-render();
-setInterval(render, 5 * 60 * 1000);
+async function refresh() {
+  try {
+    const [status, runs, events] = await Promise.all([load("status.json"), load("runs.json"), load("events.json")]);
+    STATE = { status, runs, events };
+    render();
+  } catch {
+    if (!STATE) document.getElementById("gen").textContent = "Données indisponibles (le superviseur n'a pas encore tourné ?)";
+  }
+}
+
+refresh();
+setInterval(refresh, 5 * 60 * 1000);
 </script>
 </body>
 </html>
