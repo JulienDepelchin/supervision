@@ -2,7 +2,7 @@ name: Supervision
 
 on:
   schedule:
-    - cron: "7,37 * * * *"        # secours ; déclencheur principal : Worker Cloudflare (cloudflare/worker.js), toutes les 15 min
+    - cron: "7,37 * * * *"        # secours ; déclencheur principal : Worker Cloudflare lab-crons (cloudflare/lab-crons.js), toutes les 15 min
   workflow_dispatch:
     inputs:
       heartbeat:                  # rempli par les jobs hors GitHub (VPS), voir README

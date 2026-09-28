@@ -22,7 +22,7 @@ jobs:
     source: github
     repo: veille-carburants
     workflow: alerte-carburants.yml
-    declencheur: Cloudflare, toutes les 30 min
+    declencheur: Cloudflare lab-crons, toutes les 30 min
     max_silence: 90m
 
   - id: transports-autoroutes
@@ -31,7 +31,7 @@ jobs:
     source: github
     repo: classement-actifs-lille
     workflow: poll-autoroutes.yml
-    declencheur: Cloudflare, toutes les 10 min
+    declencheur: Cloudflare lab-crons, toutes les 10 min
     max_silence: 40m
 
   - id: transports-dir-nord
@@ -40,7 +40,7 @@ jobs:
     source: github
     repo: classement-actifs-lille
     workflow: poll-dir-nord.yml
-    declencheur: Cloudflare, toutes les 10 min
+    declencheur: Cloudflare lab-crons, toutes les 10 min
     max_silence: 40m
 
   - id: transports-ilevia
@@ -49,7 +49,7 @@ jobs:
     source: github
     repo: classement-actifs-lille
     workflow: poll-ilevia-pertu.yml
-    declencheur: Cloudflare, toutes les 10 min
+    declencheur: Cloudflare lab-crons, toutes les 10 min
     max_silence: 40m
 
   - id: transports-ter
@@ -58,7 +58,7 @@ jobs:
     source: github
     repo: classement-actifs-lille
     workflow: poll-ter-rt.yml
-    declencheur: Cloudflare, toutes les 10 min
+    declencheur: Cloudflare lab-crons, toutes les 10 min
     max_silence: 40m
 
   - id: veille-datagouv

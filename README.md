@@ -3,7 +3,7 @@
 Tableau de bord des jobs planifiés (crons GitHub, crons Cloudflare, VPS).
 Page : https://juliendepelchin.github.io/supervision/
 
-Toutes les 15 min (Worker Cloudflare `supervision-cron`, voir [cloudflare/worker.js](cloudflare/worker.js) ; cron GitHub toutes les 30 min en secours), le workflow `Supervision` lit l'API GitHub Actions pour chaque job de `jobs.yml`,
+Toutes les 15 min (Worker Cloudflare `lab-crons`, voir plus bas ; cron GitHub toutes les 30 min en secours), le workflow `Supervision` lit l'API GitHub Actions pour chaque job de `jobs.yml`,
 calcule son état et commite le résultat dans `docs/data/` :
 
 | État | Signification |
@@ -29,6 +29,15 @@ Fichiers publiés : `data/status.json` (état courant), `data/runs.json` (7 jour
    nom `SUPERVISION_TOKEN`, valeur = le jeton.
 4. *Settings* > *Pages* : *Deploy from a branch*, branche `main`, dossier `/docs`.
 5. Onglet *Actions* > *Supervision* > *Run workflow* pour un premier passage.
+
+## Déclencheur Cloudflare commun : `lab-crons`
+
+Tous les crons fréquents du Lab (plus d'une fois par heure, ou à heure précise) sont déclenchés par
+un seul Worker Cloudflare, `lab-crons` ([cloudflare/lab-crons.js](cloudflare/lab-crons.js)) :
+un seul déclencheur cron (`*/5 * * * *`), un seul jeton (`GITHUB_TOKEN` : Actions en lecture/écriture
+sur les dépôts concernés), et un tableau `PLANNING` qui dit quel workflow lancer et quand (heures UTC).
+
+Les crons quotidiens tolérants au retard restent sur le cron GitHub de leur dépôt.
 
 ## Ajouter un job
 
