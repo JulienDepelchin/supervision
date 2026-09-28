@@ -37,29 +37,25 @@ l'intervalle normal : les crons GitHub prennent régulièrement 30 min à plusie
 
 ## Jobs hors GitHub : heartbeat (ex. veille RAA sur le VPS)
 
-Le job signale chaque passage en déclenchant le workflow par `repository_dispatch`.
-Il faut un **second jeton** (*fine-grained*, limité au dépôt `supervision`, **Contents : Read and write**),
-stocké sur le VPS, par exemple dans `~/.config/supervision.env` : `SUPERVISION_PUSH_TOKEN=...`
+Le job signale chaque passage en lançant le workflow `Supervision` avec un champ `heartbeat`
+(`workflow_dispatch`). Il faut un **second jeton** (*fine-grained*, limité au dépôt `supervision`,
+**Actions : Read and write** ; inutile de donner l'écriture sur Contents), stocké sur le VPS
+dans `~/.config/supervision.env` (`chmod 600`) : `SUPERVISION_PUSH_TOKEN=...`
 
-Enrobage à placer dans la crontab à la place de la commande actuelle :
+Fonction à ajouter au script du job (en place dans `~/.hermes/scripts/raa_veille.sh`, qui l'appelle
+dans son `trap ERR` et en fin de script ; sauvegarde de l'ancienne version : `raa_veille.sh.bak-avant-heartbeat`) :
 
 ```bash
-#!/usr/bin/env bash
-# run_with_heartbeat.sh <job_id> <commande…>
-source ~/.config/supervision.env
-JOB="$1"; shift
-START=$(date -u +%FT%TZ); T0=$(date +%s)
-OUT=$("$@" 2>&1); CODE=$?
-STATUS=$([ $CODE -eq 0 ] && echo success || echo failure)
-MSG=$(printf '%s' "$OUT" | tail -n 1 | head -c 200 | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
-curl -s -X POST https://api.github.com/repos/JulienDepelchin/supervision/dispatches \
-  -H "Authorization: Bearer $SUPERVISION_PUSH_TOKEN" -H "Accept: application/vnd.github+json" \
-  -d "{\"event_type\":\"heartbeat\",\"client_payload\":{\"job\":\"$JOB\",\"status\":\"$STATUS\",\"start\":\"$START\",\"duration\":$(( $(date +%s) - T0 )),\"message\":$MSG}}"
-printf '%s\n' "$OUT"
-exit $CODE
+HB_START=$(date -u +%FT%TZ); HB_T0=$(date +%s)
+heartbeat() {  # heartbeat success|failure "message" ; n'échoue jamais
+  [ -f "$HOME/.config/supervision.env" ] || return 0
+  ( source "$HOME/.config/supervision.env"
+    python3 -c 'import json,sys; hb={"job":"raa-veille","status":sys.argv[1],"start":sys.argv[2],"duration":int(sys.argv[3]),"message":sys.argv[4][:200]}; print(json.dumps({"ref":"main","inputs":{"heartbeat":json.dumps(hb,ensure_ascii=False)}}))'       "$1" "$HB_START" "$(( $(date +%s) - HB_T0 ))" "$2" |
+    curl -s --max-time 10 -o /dev/null -X POST https://api.github.com/repos/JulienDepelchin/supervision/actions/workflows/supervision.yml/dispatches       -H "Authorization: Bearer $SUPERVISION_PUSH_TOKEN" -H "Accept: application/vnd.github+json" -d @- ) || true
+}
 ```
 
-Exemple : `0 13 * * 1 ~/run_with_heartbeat.sh raa-veille python3 ~/raa-veille/veille.py`
+Si le jeton expire ou si le VPS tombe, plus aucun heartbeat n'arrive et le job passe « muet » : la panne reste visible.
 
 ## Alertes Slack via Marcel
 

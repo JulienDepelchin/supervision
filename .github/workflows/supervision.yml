@@ -4,15 +4,18 @@ on:
   schedule:
     - cron: "7,37 * * * *"        # toutes les 30 min
   workflow_dispatch:
-  repository_dispatch:
-    types: [heartbeat]            # envoyé par les jobs hors GitHub (VPS)
+    inputs:
+      heartbeat:                  # rempli par les jobs hors GitHub (VPS), voir README
+        description: "Heartbeat JSON (laisser vide pour une vérification simple)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
 
-concurrency:
-  group: supervision              # un seul passage à la fois (écriture de docs/data)
-  cancel-in-progress: false
+# Pas de groupe « concurrency » : GitHub n'y garde qu'un run en attente et annulerait
+# un heartbeat arrivé en même temps qu'une vérification planifiée. Les conflits d'écriture
+# sont gérés par la boucle ci-dessous (repartir de origin/main et recalculer).
 
 jobs:
   check:
@@ -27,23 +30,24 @@ jobs:
 
       - run: pip install pyyaml
 
-      - name: Vérification
+      - name: Vérification et commit des données
         env:
           GH_TOKEN: ${{ secrets.SUPERVISION_TOKEN }}
-          HEARTBEAT: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || '' }}
-        run: |
-          if [ -n "$HEARTBEAT" ]; then
-            python supervise.py --heartbeat "$HEARTBEAT"
-          else
-            python supervise.py
-          fi
-
-      - name: Commit des données
+          HEARTBEAT: ${{ inputs.heartbeat }}
         run: |
           git config user.name "supervision-bot"
           git config user.email "supervision-bot@users.noreply.github.com"
-          git add docs/data
-          git diff --cached --quiet && exit 0
-          git commit -m "données de supervision $(date -u +%FT%TZ)"
-          for i in 1 2 3; do git pull --rebase -q && git push -q && exit 0; sleep 5; done
+          for i in 1 2 3 4; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            if [ -n "$HEARTBEAT" ]; then
+              python supervise.py --heartbeat "$HEARTBEAT"
+            else
+              python supervise.py
+            fi
+            git add docs/data
+            git diff --cached --quiet && exit 0
+            git commit -q -m "données de supervision $(date -u +%FT%TZ)"
+            git push -q origin HEAD:main && exit 0
+            sleep $((RANDOM % 15 + 5))
+          done
           exit 1

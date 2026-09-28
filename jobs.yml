@@ -13,8 +13,8 @@ jobs:
     projet: RAA-veille
     label: Veille RAA Nord / Pas-de-Calais
     source: heartbeat
-    declencheur: VPS OVH (Marcel)
-    max_silence: 8d          # À AJUSTER selon la cadence sur le VPS (hebdo le lundi sur GitHub)
+    declencheur: VPS OVH (tâche Hermes), jours ouvrés à 17 h
+    max_silence: 76h         # 72 h entre le vendredi et le lundi, plus une marge
 
   - id: veille-carburants
     projet: veille-carburants
