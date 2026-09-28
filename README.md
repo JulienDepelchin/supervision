@@ -3,7 +3,7 @@
 Tableau de bord des jobs planifiés (crons GitHub, crons Cloudflare, VPS).
 Page : https://juliendepelchin.github.io/supervision/
 
-Toutes les 30 min, le workflow `Supervision` lit l'API GitHub Actions pour chaque job de `jobs.yml`,
+Toutes les 15 min (Worker Cloudflare `supervision-cron`, voir [cloudflare/worker.js](cloudflare/worker.js) ; cron GitHub toutes les 30 min en secours), le workflow `Supervision` lit l'API GitHub Actions pour chaque job de `jobs.yml`,
 calcule son état et commite le résultat dans `docs/data/` :
 
 | État | Signification |
