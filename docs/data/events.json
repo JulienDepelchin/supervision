@@ -1,6 +1,16 @@
 {
- "seq": 1,
+ "seq": 2,
  "events": [
+  {
+   "seq": 2,
+   "at": "2026-09-29T09:16:00Z",
+   "job": "veille-ja",
+   "label": "Veille TA Lille / CAA Douai",
+   "de": "muet",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/veille-ja/actions/runs/36546528090"
+  },
   {
    "seq": 1,
    "at": "2026-09-28T10:51:45Z",
