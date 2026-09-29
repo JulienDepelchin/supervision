@@ -22,6 +22,7 @@ const PLANNING = [
   { repo: "classement-actifs-lille", workflow: "poll-autoroutes.yml", toutesLes: 10 },
   { repo: "classement-actifs-lille", workflow: "poll-dir-nord.yml", toutesLes: 10 },
   { repo: "classement-actifs-lille", workflow: "poll-ilevia-pertu.yml", toutesLes: 10 },
+  { repo: "veille-ja", workflow: "veille.yml", a: ["16:00"] },
 ];
 
 export function aLancer(scheduledTime) {

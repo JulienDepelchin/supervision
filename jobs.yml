@@ -78,3 +78,12 @@ jobs:
     workflow: update-prix-carburants.yml
     declencheur: cron GitHub quotidien
     max_silence: 36h
+
+  - id: veille-ja
+    projet: veille-ja
+    label: Veille TA Lille / CAA Douai
+    source: github
+    repo: veille-ja
+    workflow: veille.yml
+    declencheur: Cloudflare lab-crons, quotidien à 16h00 UTC
+    max_silence: 30h
