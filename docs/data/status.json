@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-02T00:01:22Z",
+ "generated_at": "2026-10-02T00:10:05Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -89,7 +89,7 @@
    "depuis": "2026-09-28T10:32:29Z",
    "dernier_run": "2026-10-02T00:00:39Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36942907551"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/36943783704"
   },
   {
    "id": "veille-datagouv",
