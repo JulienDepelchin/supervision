@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-03T16:41:18Z",
+ "generated_at": "2026-10-03T16:45:47Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -74,7 +74,7 @@
    "depuis": "2026-09-28T10:32:29Z",
    "dernier_run": "2026-10-03T16:40:38Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37137112934"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37137726565"
   },
   {
    "id": "transports-ter",
