@@ -1,6 +1,26 @@
 {
- "seq": 10,
+ "seq": 12,
  "events": [
+  {
+   "seq": 12,
+   "at": "2026-10-05T20:56:10Z",
+   "job": "transports-ilevia",
+   "label": "Poll Ilévia perturbations",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37370193112"
+  },
+  {
+   "seq": 11,
+   "at": "2026-10-05T20:56:10Z",
+   "job": "transports-autoroutes",
+   "label": "Poll autoroutes",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37371220962"
+  },
   {
    "seq": 10,
    "at": "2026-10-05T20:16:22Z",
