@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-05T15:56:00Z",
+ "generated_at": "2026-10-05T16:01:15Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -27,7 +27,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-10-05T15:30:46Z",
+   "dernier_run": "2026-10-05T16:01:05Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/37333419300"
   },
@@ -42,7 +42,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-10-05T15:50:42Z",
+   "dernier_run": "2026-10-05T16:01:05Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37336091586"
   },
@@ -57,7 +57,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-01T07:45:03Z",
-   "dernier_run": "2026-10-05T15:50:42Z",
+   "dernier_run": "2026-10-05T16:01:05Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37336092244"
   },
@@ -72,7 +72,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-10-05T15:50:42Z",
+   "dernier_run": "2026-10-05T16:01:05Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37336092082"
   },
@@ -87,9 +87,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-10-05T15:50:42Z",
+   "dernier_run": "2026-10-05T16:01:05Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37334762100"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37336091819"
   },
   {
    "id": "veille-datagouv",
@@ -132,7 +132,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-29T09:16:00Z",
-   "dernier_run": "2026-10-04T16:00:59Z",
+   "dernier_run": "2026-10-05T16:01:07Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/veille-ja/actions/runs/37215185223"
   }
