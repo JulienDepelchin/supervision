@@ -1,6 +1,26 @@
 {
- "seq": 6,
+ "seq": 8,
  "events": [
+  {
+   "seq": 8,
+   "at": "2026-10-05T19:46:08Z",
+   "job": "transports-ilevia",
+   "label": "Poll Ilévia perturbations",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37363895146"
+  },
+  {
+   "seq": 7,
+   "at": "2026-10-05T19:46:08Z",
+   "job": "transports-dir-nord",
+   "label": "Poll DIR Nord",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37363895239"
+  },
   {
    "seq": 6,
    "at": "2026-10-01T07:45:03Z",
