@@ -1,6 +1,26 @@
 {
- "seq": 12,
+ "seq": 14,
  "events": [
+  {
+   "seq": 14,
+   "at": "2026-10-05T21:11:27Z",
+   "job": "transports-dir-nord",
+   "label": "Poll DIR Nord",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37371221074"
+  },
+  {
+   "seq": 13,
+   "at": "2026-10-05T21:11:27Z",
+   "job": "transports-autoroutes",
+   "label": "Poll autoroutes",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37372248995"
+  },
   {
    "seq": 12,
    "at": "2026-10-05T20:56:10Z",
