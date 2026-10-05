@@ -1,6 +1,26 @@
 {
- "seq": 8,
+ "seq": 10,
  "events": [
+  {
+   "seq": 10,
+   "at": "2026-10-05T20:16:22Z",
+   "job": "transports-ter",
+   "label": "Poll TER temps réel",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37366007582"
+  },
+  {
+   "seq": 9,
+   "at": "2026-10-05T20:16:22Z",
+   "job": "transports-autoroutes",
+   "label": "Poll autoroutes",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/37367102223"
+  },
   {
    "seq": 8,
    "at": "2026-10-05T19:46:08Z",
