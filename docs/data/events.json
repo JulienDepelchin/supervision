@@ -1,6 +1,16 @@
 {
- "seq": 18,
+ "seq": 19,
  "events": [
+  {
+   "seq": 19,
+   "at": "2026-10-08T23:31:02Z",
+   "job": "transports-autoroutes",
+   "label": "Poll autoroutes",
+   "de": "ok",
+   "vers": "inconnu",
+   "detail": "Lecture impossible : HTTP Error 502: Bad Gateway",
+   "url": null
+  },
   {
    "seq": 18,
    "at": "2026-10-05T21:30:54Z",
