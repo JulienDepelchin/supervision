@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T15:01:46Z",
+ "generated_at": "2026-10-12T15:06:21Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -12,7 +12,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:51:45Z",
-   "dernier_run": "2026-10-09T15:00:44Z",
+   "dernier_run": "2026-10-12T15:00:44Z",
    "derniere_conclusion": "success",
    "dernier_url": null
   },
@@ -44,7 +44,7 @@
    "depuis": "2026-10-08T23:45:54Z",
    "dernier_run": "2026-10-12T15:01:03Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38265886064"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38267133321"
   },
   {
    "id": "transports-dir-nord",
@@ -89,7 +89,7 @@
    "depuis": "2026-10-05T21:21:02Z",
    "dernier_run": "2026-10-12T15:01:04Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38265886122"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38267134067"
   },
   {
    "id": "veille-datagouv",
