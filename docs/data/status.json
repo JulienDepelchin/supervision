@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T03:45:33Z",
+ "generated_at": "2026-10-15T04:00:39Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -27,7 +27,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-10-15T03:30:28Z",
+   "dernier_run": "2026-10-15T04:00:29Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/38676618182"
   },
@@ -42,9 +42,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-08T23:45:54Z",
-   "dernier_run": "2026-10-15T03:40:24Z",
+   "dernier_run": "2026-10-15T04:00:30Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38677477771"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38678338129"
   },
   {
    "id": "transports-dir-nord",
@@ -57,9 +57,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-14T19:39:52Z",
-   "dernier_run": "2026-10-15T03:40:24Z",
+   "dernier_run": "2026-10-15T04:00:29Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38677477726"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38678337921"
   },
   {
    "id": "transports-ilevia",
@@ -72,9 +72,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-05T20:56:10Z",
-   "dernier_run": "2026-10-15T03:40:24Z",
+   "dernier_run": "2026-10-15T04:00:30Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38677478059"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38678337917"
   },
   {
    "id": "transports-ter",
@@ -87,9 +87,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-05T21:21:02Z",
-   "dernier_run": "2026-10-15T03:40:24Z",
+   "dernier_run": "2026-10-15T04:00:29Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38676618539"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/38678338096"
   },
   {
    "id": "veille-datagouv",
