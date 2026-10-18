@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-18T19:23:42Z",
+ "generated_at": "2026-10-18T19:30:57Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -27,7 +27,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-09-28T10:32:29Z",
-   "dernier_run": "2026-10-18T19:00:49Z",
+   "dernier_run": "2026-10-18T19:30:49Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/39156785757"
   },
@@ -42,7 +42,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-08T23:45:54Z",
-   "dernier_run": "2026-10-18T19:20:49Z",
+   "dernier_run": "2026-10-18T19:30:49Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39158344418"
   },
@@ -57,7 +57,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-15T12:00:39Z",
-   "dernier_run": "2026-10-18T19:20:49Z",
+   "dernier_run": "2026-10-18T19:30:49Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39158344409"
   },
@@ -72,7 +72,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-05T20:56:10Z",
-   "dernier_run": "2026-10-18T19:20:49Z",
+   "dernier_run": "2026-10-18T19:30:49Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39158344534"
   },
@@ -87,9 +87,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-05T21:21:02Z",
-   "dernier_run": "2026-10-18T19:20:49Z",
+   "dernier_run": "2026-10-18T19:30:49Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39157568754"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39158344517"
   },
   {
    "id": "veille-datagouv",
