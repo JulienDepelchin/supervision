@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T07:15:24Z",
+ "generated_at": "2026-10-23T07:24:07Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -42,7 +42,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-08T23:45:54Z",
-   "dernier_run": "2026-10-23T07:10:14Z",
+   "dernier_run": "2026-10-23T07:20:18Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39916052122"
   },
@@ -57,7 +57,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-22T15:15:35Z",
-   "dernier_run": "2026-10-23T07:10:15Z",
+   "dernier_run": "2026-10-23T07:20:18Z",
    "derniere_conclusion": "success",
    "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39916052656"
   },
@@ -72,9 +72,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-05T20:56:10Z",
-   "dernier_run": "2026-10-23T07:10:15Z",
+   "dernier_run": "2026-10-23T07:20:18Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39916052470"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39917067708"
   },
   {
    "id": "transports-ter",
@@ -87,9 +87,9 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-05T21:21:02Z",
-   "dernier_run": "2026-10-23T07:10:15Z",
+   "dernier_run": "2026-10-23T07:20:18Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39914997165"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/39916052318"
   },
   {
    "id": "veille-datagouv",
