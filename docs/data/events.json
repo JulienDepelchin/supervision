@@ -1,6 +1,16 @@
 {
- "seq": 55,
+ "seq": 56,
  "events": [
+  {
+   "seq": 56,
+   "at": "2026-10-26T18:30:20Z",
+   "job": "veille-carburants",
+   "label": "Alerte prix carburants",
+   "de": "inconnu",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/40373840494"
+  },
   {
    "seq": 55,
    "at": "2026-10-26T18:15:20Z",
