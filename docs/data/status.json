@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-01T09:30:15Z",
+ "generated_at": "2026-11-01T09:45:13Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -29,7 +29,7 @@
    "depuis": "2026-10-26T18:30:20Z",
    "dernier_run": "2026-11-01T09:30:07Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/41289115959"
+   "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/41293396007"
   },
   {
    "id": "transports-autoroutes",
