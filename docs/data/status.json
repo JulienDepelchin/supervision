@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T16:00:58Z",
+ "generated_at": "2026-11-03T16:04:57Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -12,7 +12,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-14T15:26:29Z",
-   "dernier_run": "2026-11-02T16:00:44Z",
+   "dernier_run": "2026-11-03T16:00:44Z",
    "derniere_conclusion": "success",
    "dernier_url": null
   },
@@ -29,7 +29,7 @@
    "depuis": "2026-10-26T18:30:20Z",
    "dernier_run": "2026-11-03T16:00:49Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/41664651608"
+   "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/41669747911"
   },
   {
    "id": "transports-autoroutes",
@@ -44,7 +44,7 @@
    "depuis": "2026-10-08T23:45:54Z",
    "dernier_run": "2026-11-03T16:00:48Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/41668076725"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/41669747395"
   },
   {
    "id": "transports-dir-nord",
@@ -59,7 +59,7 @@
    "depuis": "2026-10-30T10:15:20Z",
    "dernier_run": "2026-11-03T16:00:48Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/41668077578"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/41669747450"
   },
   {
    "id": "transports-ilevia",
@@ -74,7 +74,7 @@
    "depuis": "2026-10-05T20:56:10Z",
    "dernier_run": "2026-11-03T16:00:48Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/41668078360"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/41669747566"
   },
   {
    "id": "transports-ter",
@@ -134,7 +134,7 @@
    "depuis": "2026-09-29T09:16:00Z",
    "dernier_run": "2026-11-03T16:00:50Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/veille-ja/actions/runs/41477119246"
+   "dernier_url": "https://github.com/JulienDepelchin/veille-ja/actions/runs/41669754047"
   }
  ]
 }
