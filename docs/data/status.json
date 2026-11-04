@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-04T16:01:01Z",
+ "generated_at": "2026-11-04T16:09:03Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -12,7 +12,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-10-14T15:26:29Z",
-   "dernier_run": "2026-11-03T16:00:44Z",
+   "dernier_run": "2026-11-04T16:00:44Z",
    "derniere_conclusion": "success",
    "dernier_url": null
   },
