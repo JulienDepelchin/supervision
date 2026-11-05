@@ -1,6 +1,16 @@
 {
- "seq": 78,
+ "seq": 79,
  "events": [
+  {
+   "seq": 79,
+   "at": "2026-11-05T16:00:57Z",
+   "job": "raa-veille",
+   "label": "Veille RAA Nord / Pas-de-Calais",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": null
+  },
   {
    "seq": 78,
    "at": "2026-10-30T10:15:20Z",
