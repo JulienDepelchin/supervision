@@ -1,6 +1,16 @@
 {
- "seq": 80,
+ "seq": 81,
  "events": [
+  {
+   "seq": 81,
+   "at": "2026-11-05T18:01:05Z",
+   "job": "comparateur-carburants",
+   "label": "Update prix carburants",
+   "de": "ok",
+   "vers": "inconnu",
+   "detail": "Lecture impossible : HTTP Error 502: Bad Gateway",
+   "url": null
+  },
   {
    "seq": 80,
    "at": "2026-11-05T17:18:24Z",
