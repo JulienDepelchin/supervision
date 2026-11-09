@@ -1,6 +1,46 @@
 {
- "seq": 82,
+ "seq": 86,
  "events": [
+  {
+   "seq": 86,
+   "at": "2026-11-09T18:31:22Z",
+   "job": "transports-ter",
+   "label": "Poll TER temps réel",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/42673216488"
+  },
+  {
+   "seq": 85,
+   "at": "2026-11-09T18:31:22Z",
+   "job": "transports-ilevia",
+   "label": "Poll Ilévia perturbations",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/42673216196"
+  },
+  {
+   "seq": 84,
+   "at": "2026-11-09T18:31:22Z",
+   "job": "transports-dir-nord",
+   "label": "Poll DIR Nord",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/42673216414"
+  },
+  {
+   "seq": 83,
+   "at": "2026-11-09T18:31:22Z",
+   "job": "transports-autoroutes",
+   "label": "Poll autoroutes",
+   "de": "ok",
+   "vers": "echec",
+   "detail": "Dernier run : failure",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/42673216823"
+  },
   {
    "seq": 82,
    "at": "2026-11-05T18:16:00Z",
