@@ -1,6 +1,56 @@
 {
- "seq": 97,
+ "seq": 102,
  "events": [
+  {
+   "seq": 102,
+   "at": "2026-11-11T21:15:30Z",
+   "job": "transports-ter",
+   "label": "Poll TER temps réel",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43099335728"
+  },
+  {
+   "seq": 101,
+   "at": "2026-11-11T21:15:30Z",
+   "job": "transports-ilevia",
+   "label": "Poll Ilévia perturbations",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43100766633"
+  },
+  {
+   "seq": 100,
+   "at": "2026-11-11T21:15:30Z",
+   "job": "transports-dir-nord",
+   "label": "Poll DIR Nord",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43100766625"
+  },
+  {
+   "seq": 99,
+   "at": "2026-11-11T21:15:30Z",
+   "job": "transports-autoroutes",
+   "label": "Poll autoroutes",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43100766596"
+  },
+  {
+   "seq": 98,
+   "at": "2026-11-11T21:15:30Z",
+   "job": "veille-carburants",
+   "label": "Alerte prix carburants",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/43099335140"
+  },
   {
    "seq": 97,
    "at": "2026-11-11T21:00:31Z",
