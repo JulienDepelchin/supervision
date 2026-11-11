@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T20:15:26Z",
+ "generated_at": "2026-11-11T21:00:31Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -24,12 +24,12 @@
    "declencheur": "Cloudflare lab-crons, toutes les 30 min",
    "repo": "JulienDepelchin/veille-carburants",
    "max_silence": "90m",
-   "etat": "ok",
-   "detail": "",
-   "depuis": "2026-11-10T17:15:41Z",
-   "dernier_run": "2026-11-11T20:00:19Z",
-   "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/43092398494"
+   "etat": "echec",
+   "detail": "Dernier run : startup_failure",
+   "depuis": "2026-11-11T21:00:31Z",
+   "dernier_run": "2026-11-11T21:00:19Z",
+   "derniere_conclusion": "startup_failure",
+   "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/43096443588"
   },
   {
    "id": "transports-autoroutes",
@@ -39,12 +39,12 @@
    "declencheur": "Cloudflare lab-crons, toutes les 10 min",
    "repo": "JulienDepelchin/classement-actifs-lille",
    "max_silence": "40m",
-   "etat": "ok",
-   "detail": "",
-   "depuis": "2026-11-09T18:45:56Z",
-   "dernier_run": "2026-11-11T20:10:19Z",
-   "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43093973657"
+   "etat": "echec",
+   "detail": "Dernier run : startup_failure",
+   "depuis": "2026-11-11T21:00:31Z",
+   "dernier_run": "2026-11-11T21:00:19Z",
+   "derniere_conclusion": "startup_failure",
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43097426038"
   },
   {
    "id": "transports-dir-nord",
@@ -54,12 +54,12 @@
    "declencheur": "Cloudflare lab-crons, toutes les 10 min",
    "repo": "JulienDepelchin/classement-actifs-lille",
    "max_silence": "40m",
-   "etat": "ok",
-   "detail": "",
-   "depuis": "2026-11-09T18:45:56Z",
-   "dernier_run": "2026-11-11T20:10:19Z",
-   "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43093973588"
+   "etat": "echec",
+   "detail": "Dernier run : startup_failure",
+   "depuis": "2026-11-11T21:00:31Z",
+   "dernier_run": "2026-11-11T21:00:19Z",
+   "derniere_conclusion": "startup_failure",
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43097428951"
   },
   {
    "id": "transports-ilevia",
@@ -69,12 +69,12 @@
    "declencheur": "Cloudflare lab-crons, toutes les 10 min",
    "repo": "JulienDepelchin/classement-actifs-lille",
    "max_silence": "40m",
-   "etat": "ok",
-   "detail": "",
-   "depuis": "2026-11-09T18:45:56Z",
-   "dernier_run": "2026-11-11T20:10:19Z",
-   "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43093973719"
+   "etat": "echec",
+   "detail": "Dernier run : startup_failure",
+   "depuis": "2026-11-11T21:00:31Z",
+   "dernier_run": "2026-11-11T21:00:19Z",
+   "derniere_conclusion": "startup_failure",
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43097427370"
   },
   {
    "id": "transports-ter",
@@ -84,12 +84,12 @@
    "declencheur": "Cloudflare lab-crons, toutes les 10 min",
    "repo": "JulienDepelchin/classement-actifs-lille",
    "max_silence": "40m",
-   "etat": "ok",
-   "detail": "",
-   "depuis": "2026-11-09T18:45:56Z",
-   "dernier_run": "2026-11-11T20:10:19Z",
-   "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43092398541"
+   "etat": "echec",
+   "detail": "Dernier run : startup_failure",
+   "depuis": "2026-11-11T21:00:31Z",
+   "dernier_run": "2026-11-11T21:00:19Z",
+   "derniere_conclusion": "startup_failure",
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43097426108"
   },
   {
    "id": "veille-datagouv",
