@@ -1,6 +1,16 @@
 {
- "seq": 103,
+ "seq": 104,
  "events": [
+  {
+   "seq": 104,
+   "at": "2026-11-12T18:15:27Z",
+   "job": "transports-ter",
+   "label": "Poll TER temps réel",
+   "de": "inconnu",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/43275292283"
+  },
   {
    "seq": 103,
    "at": "2026-11-12T18:00:29Z",
