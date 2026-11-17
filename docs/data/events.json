@@ -1,6 +1,16 @@
 {
- "seq": 105,
+ "seq": 106,
  "events": [
+  {
+   "seq": 106,
+   "at": "2026-11-17T07:30:54Z",
+   "job": "transports-dir-nord",
+   "label": "Poll DIR Nord",
+   "de": "echec",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/44037981165"
+  },
   {
    "seq": 105,
    "at": "2026-11-17T07:15:56Z",
