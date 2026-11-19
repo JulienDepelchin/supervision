@@ -1,6 +1,16 @@
 {
- "seq": 118,
+ "seq": 119,
  "events": [
+  {
+   "seq": 119,
+   "at": "2026-11-19T17:30:38Z",
+   "job": "transports-ilevia",
+   "label": "Poll Ilévia perturbations",
+   "de": "ok",
+   "vers": "inconnu",
+   "detail": "Lecture impossible : HTTP Error 500: Internal Server Error",
+   "url": null
+  },
   {
    "seq": 118,
    "at": "2026-11-18T16:31:18Z",
