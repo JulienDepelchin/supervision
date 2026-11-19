@@ -1,6 +1,16 @@
 {
- "seq": 119,
+ "seq": 120,
  "events": [
+  {
+   "seq": 120,
+   "at": "2026-11-19T17:45:38Z",
+   "job": "transports-ilevia",
+   "label": "Poll Ilévia perturbations",
+   "de": "inconnu",
+   "vers": "ok",
+   "detail": "",
+   "url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/44579714713"
+  },
   {
    "seq": 119,
    "at": "2026-11-19T17:30:38Z",
