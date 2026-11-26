@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T16:00:29Z",
+ "generated_at": "2026-11-26T16:00:59Z",
  "jobs": [
   {
    "id": "raa-veille",
@@ -12,7 +12,7 @@
    "etat": "ok",
    "detail": "",
    "depuis": "2026-11-05T17:18:24Z",
-   "dernier_run": "2026-11-25T16:00:47Z",
+   "dernier_run": "2026-11-26T16:00:47Z",
    "derniere_conclusion": "success",
    "dernier_url": null
   },
@@ -29,7 +29,7 @@
    "depuis": "2026-11-11T21:15:30Z",
    "dernier_run": "2026-11-26T16:00:22Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/45849751949"
+   "dernier_url": "https://github.com/JulienDepelchin/veille-carburants/actions/runs/45854607841"
   },
   {
    "id": "transports-autoroutes",
@@ -59,7 +59,7 @@
    "depuis": "2026-11-25T08:45:38Z",
    "dernier_run": "2026-11-26T16:00:22Z",
    "derniere_conclusion": "success",
-   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/45853025093"
+   "dernier_url": "https://github.com/JulienDepelchin/classement-actifs-lille/actions/runs/45854607994"
   },
   {
    "id": "transports-ilevia",
